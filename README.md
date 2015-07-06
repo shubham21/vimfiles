@@ -15,7 +15,7 @@ $ git submodule init
 $ git submodule update
 ```
 
-> You can also do the above in one setp
+> You can also do the above in one step
 
 ```sh
 $ cd $HOME

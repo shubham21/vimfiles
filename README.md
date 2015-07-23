@@ -27,7 +27,7 @@ $ git clone --recursive https://github.com/xk0nsid/vimfiles.git
 ```sh
 $ cd $HOME/vimfiles
 $ ln -s $PWD/vim $HOME/.vim
-$ ln -s $PWD/.vimrc $HOME/.vimrc
+$ ln -s $PWD/vimrc $HOME/.vimrc
 ```
 
 That's it. It's as easy as that.

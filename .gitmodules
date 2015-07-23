@@ -1,9 +1,6 @@
 [submodule "vim/bundle/neocomplete.vim"]
 	path = vim/bundle/neocomplete.vim
 	url = https://github.com/Shougo/neocomplete.vim
-[submodule "vim/bundle/vim-wombat256mod"]
-	path = vim/bundle/vim-wombat256mod
-	url = https://github.com/michalbachowski/vim-wombat256mod
 [submodule "vim/bundle/nerdtree"]
 	path = vim/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
@@ -28,3 +25,6 @@
 [submodule "vim/bundle/vim-surround"]
 	path = vim/bundle/vim-surround
 	url = https://github.com/tpope/vim-surround.git
+[submodule "vim/bundle/flazz-colorschemes"]
+	path = vim/bundle/flazz-colorschemes
+	url = https://github.com/flazz/vim-colorschemes.git

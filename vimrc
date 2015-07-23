@@ -9,6 +9,10 @@ autocmd! bufwritepost .vimrc source %
 autocmd! bufwritepost vimrc source %
 
 
+" Automatically reload files if change detected from other source
+set autoread
+
+
 " Better copy & paste
 " When you want to paste large blocks of code into vim, press F2 before you
 " paste. At the bottom you should see ``-- INSERT (paste) --``.
@@ -25,6 +29,10 @@ set bs=2     " make backspace behave like normal again
 " I like to have it here becuase it is easier to reach than the default and
 " it is next to ``m`` and ``n`` which I use for navigating between tabs.
 let mapleader = ","
+
+
+inoremap <Leader>o <Esc>o
+inoremap <Leader>o <Esc>O
 
 
 " Bind nohl
@@ -232,6 +240,8 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_flake8_args="--ignore=E501,W601,F403,E128,D100,D102"
+let g:syntastic_cpp_compiler_options = ' -std=c++11'
+
 
 " Python folding
 " mkdir -p ~/.vim/ftplugin

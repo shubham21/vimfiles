@@ -166,7 +166,7 @@ nnoremap <Leader>f :NERDTreeToggle<CR>
 
 
 " ============================================================================
-" Python IDE Setup
+" IDE Setup
 " ============================================================================
 
 
@@ -179,8 +179,15 @@ nnoremap <Leader>f :NERDTreeToggle<CR>
 " Setting for vim-airline
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#virtualenv#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme = "hybridline"
+
+
+" Settings for Unite
+nnoremap <Leader>uo :Unite file buffer<CR>
+nnoremap <Leader>uf :Unite file<CR>
+nnoremap <Leader>ub :Unite file<CR>
 
 
 " Settings for ctrlp

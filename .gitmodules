@@ -34,3 +34,6 @@
 [submodule "vim/bundle/tagbar"]
 	path = vim/bundle/tagbar
 	url = https://github.com/majutsushi/tagbar
+[submodule "patched-fonts"]
+	path = patched-fonts
+	url = https://github.com/powerline/fonts

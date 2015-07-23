@@ -87,3 +87,11 @@ This is as easy as doing:
 ```sh
 $ pip install jedi
 ```
+
+#### 3. Patched fonts for beautiful statusline
+```sh
+$ cd $HOME/vimfiles/patched-fonts
+$ ./install.sh
+```
+
+> Note: Remember to change your terminal's font to one of the patched fonts.

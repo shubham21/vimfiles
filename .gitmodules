@@ -46,3 +46,6 @@
 [submodule "vim/bundle/promptline"]
 	path = vim/bundle/promptline
 	url = https://github.com/edkolev/promptline.vim
+[submodule "vim/bundle/tabular.git"]
+	path = vim/bundle/tabular.git
+	url = https://github.com/godlygeek/tabular.git

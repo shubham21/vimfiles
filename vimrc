@@ -6,7 +6,6 @@ let g:neocomplete#enable_at_startup = 1
 
 " Automatic reloading of .vimrc
 autocmd! bufwritepost .vimrc source %
-autocmd! bufwritepost vimrc source %
 
 
 " Automatically reload files if change detected from other source
@@ -31,7 +30,10 @@ set bs=2     " make backspace behave like normal again
 let mapleader = ","
 
 
+" Easily edit new line above or below the cursor
+" Below cursor
 inoremap <Leader>o <Esc>o
+" Above cursor
 inoremap <Leader>o <Esc>O
 
 
@@ -171,16 +173,27 @@ nnoremap <Leader>f :NERDTreeToggle<CR>
 
 
 " Settings for vim-powerline
+" Note: I don't use this anymore
 " cd ~/.vim/bundle
 " git clone git://github.com/Lokaltog/vim-powerline.git
 " set laststatus=2
 
 
 " Setting for vim-airline
+
+" Show airline all the time, by default it only shows when we create a split
 set laststatus=2
+
+" Enable better tabline extension
 let g:airline#extensions#tabline#enabled = 1
+
+" Enable virtual env extension for Airline
 let g:airline#extensions#virtualenv#enabled = 1
+
+" Use patched fonts in Airline
 let g:airline_powerline_fonts = 1
+
+" Change default theme
 let g:airline_theme = "hybridline"
 
 
@@ -207,15 +220,15 @@ let g:ctrlp_prompt_mappings = { 'AcceptSelection("e")': ['<c-t>'], 'AcceptSelect
 " and uncomment the part about jedi-vim instead
 " cd ~/.vim/bundle
 " git clone https://github.com/klen/python-mode
-"" map <Leader>g :call RopeGotoDefinition()<CR>
-"" let ropevim_enable_shortcuts = 1
-"" let g:pymode_rope_goto_def_newwin = "vnew"
-"" let g:pymode_rope_extended_complete = 1
-"" let g:pymode_breakpoint = 0
-"" let g:pymode_syntax = 1
-"" let g:pymode_syntax_builtin_objs = 0
-"" let g:pymode_syntax_builtin_funcs = 0
-"" map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
+" map <Leader>g :call RopeGotoDefinition()<CR>
+" let ropevim_enable_shortcuts = 1
+" let g:pymode_rope_goto_def_newwin = "vnew"
+" let g:pymode_rope_extended_complete = 1
+" let g:pymode_breakpoint = 0
+" let g:pymode_syntax = 1
+" let g:pymode_syntax_builtin_objs = 0
+" let g:pymode_syntax_builtin_funcs = 0
+" map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
 " Settings for jedi-vim
 " cd ~/.vim/bundle
@@ -271,5 +284,3 @@ set nofoldenable
 " Smash switch to Normal mode
 inoremap jj <Esc>
 vnoremap <Leader><Leader>j <Esc>
-
-

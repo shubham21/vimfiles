@@ -43,3 +43,6 @@
 [submodule "vim/bundle/vim-unite"]
 	path = vim/bundle/vim-unite
 	url = https://github.com/Shougo/unite.vim
+[submodule "vim/bundle/promptline"]
+	path = vim/bundle/promptline
+	url = https://github.com/edkolev/promptline.vim

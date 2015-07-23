@@ -95,3 +95,10 @@ $ ./install.sh
 ```
 
 > Note: Remember to change your terminal's font to one of the patched fonts.
+
+#### 4. Change your bash/zsh to look like Airline
+Add the following line to your `.bashrc` or `.zshrc`
+
+```
+source $HOME/vimfiles/shell.sh
+```

@@ -56,10 +56,10 @@ noremap <Leader>E :qa!<CR>   " Quit all windows
 
 " bind Ctrl+<movement> keys to move around the windows, instead of using Ctrl+w + <movement>
 " Every unnecessary keystroke that can be saved is good for your health :)
-"map <c-j> <c-w>j
-"map <c-k> <c-w>k
-"map <c-l> <c-w>l
-"map <c-h> <c-w>h
+map <Leader>j <c-w>j
+map <Leader>k <c-w>k
+map <Leader>l <c-w>l
+map <Leader>h <c-w>h
 
 
 " easier moving between tabs
@@ -173,7 +173,12 @@ nnoremap <Leader>f :NERDTreeToggle<CR>
 " Settings for vim-powerline
 " cd ~/.vim/bundle
 " git clone git://github.com/Lokaltog/vim-powerline.git
+" set laststatus=2
+
+
+" Setting for vim-airline
 set laststatus=2
+let g:airline#extensions#tabline#enabled = 1
 
 
 " Settings for ctrlp
@@ -241,6 +246,12 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_flake8_args="--ignore=E501,W601,F403,E128,F401,D100,D102"
 let g:syntastic_cpp_compiler_options = ' -std=c++11'
+
+
+" Tagbar config
+nnoremap <F8> :TagbarToggle<CR>
+inoremap <F8> :TagbarToggle<CR>
+vnoremap <F8> :TagbarToggle<CR>
 
 
 " Python folding

@@ -79,6 +79,7 @@ map <Leader>m <esc>:tabnext<CR>
 vnoremap < <gv  " better indentation
 vnoremap > >gv  " better indentation
 
+set term=screen-256color
 
 " Show whitespace
 " MUST be inserted BEFORE the colorscheme command

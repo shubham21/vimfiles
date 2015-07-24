@@ -1,8 +1,25 @@
-" Configure Pathogen
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                       Vim Running Configuration                       "
+"           Author: Siddharth Yadav <siddharth_yadav@outlook.com>       "
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+" => Initializers {{{
+"    Any initializers for plugin or functionality etc are under here
+" ======================================================================
+
+" Initialize Pathogen
 call pathogen#infect()
+
 
 " Initialize neocomplete
 let g:neocomplete#enable_at_startup = 1
+
+" }}}
+
+" => General {{{
+"    This is general purpose configuration
+" ======================================================================
 
 " Automatic reloading of .vimrc
 autocmd! bufwritepost .vimrc source %
@@ -30,56 +47,110 @@ set bs=2     " make backspace behave like normal again
 let mapleader = ","
 
 
-" Easily edit new line above or below the cursor
-" Below cursor
-inoremap <Leader>o <Esc>o
-" Above cursor
-inoremap <Leader>o <Esc>O
+" Useful settings
+set history=700
+set undolevels=700
 
 
-" Bind nohl
-" Removes highlight of your last search
-" ``<C>`` stands for ``CTRL`` and therefore ``<C-n>`` stands for ``CTRL+n``
-noremap <C-n> :nohl<CR>
-vnoremap <C-n> :nohl<CR>
-inoremap <C-n> :nohl<CR>
+" Real programmers don't use TABs but spaces
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set shiftround
+set expandtab
 
 
-" Quicksave command
-noremap <C-s> :update<CR>
-vnoremap <C-s> <C-C>:update<CR>
-inoremap <C-s> <C-O>:update<CR>
+" Search
+" ===============
+
+" Highlight search results
+set hlsearch
 
 
-" Quick quit command
-noremap <Leader>e :quit<CR>  " Quit current window
-noremap <Leader>E :qa!<CR>   " Quit all windows
+" Make search act like search in modern browsers
+set incsearch
 
 
-" bind Ctrl+<movement> keys to move around the windows, instead of using Ctrl+w + <movement>
-" Every unnecessary keystroke that can be saved is good for your health :)
-map <Leader>j <c-w>j
-map <Leader>k <c-w>k
-map <Leader>l <c-w>l
-map <Leader>h <c-w>h
+" Case insensitive search
+set ignorecase
 
 
-" easier moving between tabs
-map <Leader>n <esc>:tabprevious<CR>
-map <Leader>m <esc>:tabnext<CR>
+" When searching try to be smart about cases
+set smartcase
 
 
-" map sort function to a key
-"" vnoremap <Leader>s :sort<CR>
+" Backup
+" ===============
+
+" Don't need backup files. We already use git or svn etc.
+set nobackup
+set nowritebackup
+set noswapfile
 
 
-" easier moving of code blocks
-" Try to go into visual mode (v), thenselect several lines of code here and
-" then press ``>`` several times.
-vnoremap < <gv  " better indentation
-vnoremap > >gv  " better indentation
+" Specify the behavior when switching between buffers
+try
+  set switchbuf=useopen,usetab,newtab
+  set stal=2
+catch
+endtry
 
+
+" Return to last edit position when opening files (You want this!)
+autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif
+" Remember info about open buffers on close
+set viminfo^=%
+
+
+" Code Folding
+" ===============
+
+" Enable folding
+set foldenable
+
+" Open most folds by default
+set foldlevelstart=10
+
+" Maximum 10 nested folds
+set foldnestmax=10
+
+" Fold based on indentation
+set foldmethod=indent
+
+" }}}
+
+" => User Interface {{{
+"    All config related to UI of vim
+" ======================================================================
+
+
+" Set 7 lines to the cursor
+set so=7
+
+
+" Turn on the WiLd menu
+set wildmenu
+
+
+" Ignore compiled files
+set wildignore=*.o,*~,*.pyc
+
+
+"Always show current position
+set ruler
+
+
+" Height of the command bar
+set cmdheight=2
+
+
+" Set Terminal Color to 256
+" This helps when running vim in tmux
 set term=screen-256color
+
 
 " Show whitespace
 " MUST be inserted BEFORE the colorscheme command
@@ -109,8 +180,151 @@ set fo-=t   " don't automatically wrap text when typing
 set colorcolumn=80
 highlight ColorColumn ctermbg=233
 
+
 " Set relative line number
 set relativenumber
+
+
+" Better visual cue while editing
+" Enabling line highlight & column highlight
+set cursorline
+set cursorcolumn
+
+" }}}
+
+" => Keymaps {{{
+"    All the keymaps are defined here.
+" ======================================================================
+
+" save session
+nnoremap <leader>s :mksession<CR>
+
+
+" Treat long lines as break lines (useful when moving around in them)
+map j gj
+map k gk
+
+
+" Smash switch to Normal mode
+inoremap jj <Esc>
+vnoremap <Leader><Leader>j <Esc>
+
+
+" Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
+nnoremap <S-j> :m .+1<CR>==
+nnoremap <S-k> :m .-2<CR>==
+inoremap <S-j> <Esc>:m .+1<CR>==gi
+inoremap <S-k> <Esc>:m .-2<CR>==gi
+vnoremap <S-j> :m '>+1<CR>gv=gv
+vnoremap <S-k> :m '<-2<CR>gv=gv
+
+
+if has("mac") || has("macunix")
+  nmap <D-j> <M-j>
+  nmap <D-k> <M-k>
+  vmap <D-j> <M-j>
+  vmap <D-k> <M-k>
+endif
+
+
+" Delete trailing white space on save, useful for Python and CoffeeScript ;)
+func! DeleteTrailingWS()
+  exe "normal mz"
+  %s/\s\+$//ge
+  exe "normal `z"
+endfunc
+autocmd BufWrite *.py :call DeleteTrailingWS()
+autocmd BufWrite *.coffee :call DeleteTrailingWS()
+
+
+" Tab manipulation
+map <leader>tn :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove
+
+
+" Easily edit new line above or below the cursor
+" Below cursor
+inoremap <Leader>o <Esc>o
+" Above cursor
+inoremap <Leader>O <Esc>O
+
+
+" highlight last inserted text
+nnoremap gV `[v`]
+
+" Unite
+" ===============
+
+nnoremap <Leader>uo :Unite file buffer<CR>
+nnoremap <Leader>uf :Unite file<CR>
+nnoremap <Leader>ub :Unite file<CR>
+
+
+" Bind nohl
+" Removes highlight of your last search
+" ``<C>`` stands for ``CTRL`` and therefore ``<C-n>`` stands for ``CTRL+n``
+noremap <C-n> :nohl<CR>
+vnoremap <C-n> :nohl<CR>
+inoremap <C-n> :nohl<CR>
+
+
+" Quicksave command
+noremap <C-s> :update<CR>
+vnoremap <C-s> <C-C>:update<CR>
+inoremap <C-s> <C-O>:update<CR>
+
+
+" Quick quit command
+noremap <Leader>e :quit<CR>  " Quit current window
+noremap <Leader>E :qa!<CR>   " Quit all windows
+
+
+" Code Folding
+" ===============
+
+" Space opens/closes folds
+nnoremap <space> za
+
+
+" bind Ctrl+<movement> keys to move around the windows, instead of using Ctrl+w + <movement>
+" Every unnecessary keystroke that can be saved is good for your health :)
+map <Leader>j <c-w>j
+map <Leader>k <c-w>k
+map <Leader>l <c-w>l
+map <Leader>h <c-w>h
+
+
+" easier moving between tabs
+map <Leader>n <esc>:tabprevious<CR>
+map <Leader>m <esc>:tabnext<CR>
+
+
+" Better copy/paste to system clipboard
+nnoremap <Leader>cy "+y
+nnoremap <Leader>cyy "+yy
+nnoremap <Leader>cp "+p
+inoremap <Leader>cy "+y
+inoremap <Leader>cyy "+yy
+inoremap <Leader>cp "+p
+vnoremap <Leader>cy "+y
+vnoremap <Leader>cp "+p
+
+
+" Open Ag.vim
+nnoremap <Leader>a :Ag
+
+
+" map sort function to a key
+"" vnoremap <Leader>s :sort<CR>
+
+
+" easier moving of code blocks
+" Try to go into visual mode (v), thenselect several lines of code here and
+" then press ``>`` several times.
+vnoremap < <gv  " better indentation
+vnoremap > >gv  " better indentation
 
 
 " easier formatting of paragraphs
@@ -118,41 +332,10 @@ vmap Q gq
 nmap Q gqap
 
 
-" Useful settings
-set history=700
-set undolevels=700
-
-
-" Real programmers don't use TABs but spaces
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set shiftround
-set expandtab
-
-
-" Make search case insensitive
-set hlsearch
-set incsearch
-set ignorecase
-set smartcase
-
-
-" Disable stupid backup and swap files - they trigger too many events
-" for file system watchers
-set nobackup
-set nowritebackup
-set noswapfile
-
-" Better visual cue while editing
-" Enabling line highlight & column highlight
-set cursorline
-set cursorcolumn
-
-
 " Better line scrolling
 nnoremap <C-j> <C-e>
 nnoremap <C-k> <C-y>
+
 
 " Better buffer manipulation, cuz we all need them
 nnoremap <Leader>bl :buffers<CR>
@@ -160,27 +343,38 @@ nnoremap <Leader>bs :b
 nnoremap <Leader>bd :bd<CR>
 
 
-" NERD Tree setup
+" NERD Tree
+" ===================
+
 " cd ~/.vim/bundle
 " git clone https://github.com/scrooloose/nerdtree.git
 nnoremap <Leader>f :NERDTreeToggle<CR>
 
 
+" Gundo
+" ==================
 
+" Toggle gundo
+nnoremap <leader>u :GundoToggle<CR>
 
+" }}}
+
+" => Plugins {{{
+" This contains plugins specific configurations
 " ============================================================================
-" IDE Setup
-" ============================================================================
 
 
-" Settings for vim-powerline
+" Vim Powerline
+" ===============
+
 " Note: I don't use this anymore
 " cd ~/.vim/bundle
 " git clone git://github.com/Lokaltog/vim-powerline.git
 " set laststatus=2
 
 
-" Setting for vim-airline
+" Vim Airline
+" ===============
 
 " Show airline all the time, by default it only shows when we create a split
 set laststatus=2
@@ -198,13 +392,9 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme = "hybridline"
 
 
-" Settings for Unite
-nnoremap <Leader>uo :Unite file buffer<CR>
-nnoremap <Leader>uf :Unite file<CR>
-nnoremap <Leader>ub :Unite file<CR>
+" CtrlP
+" ===============
 
-
-" Settings for ctrlp
 " cd ~/.vim/bundle
 " git clone https://github.com/kien/ctrlp.vim.git
 let g:ctrlp_max_height = 30
@@ -216,7 +406,10 @@ nnoremap <C-P> :CtrlPBuffer<CR>
 " Open files in new tabs rather than buffers
 let g:ctrlp_prompt_mappings = { 'AcceptSelection("e")': ['<c-t>'], 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],}
 
-" Settings for python-mode
+
+" Python Mode
+" ===============
+
 " Note: I'm no longer using this. Leave this commented out
 " and uncomment the part about jedi-vim instead
 " cd ~/.vim/bundle
@@ -231,7 +424,10 @@ let g:ctrlp_prompt_mappings = { 'AcceptSelection("e")': ['<c-t>'], 'AcceptSelect
 " let g:pymode_syntax_builtin_funcs = 0
 " map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
-" Settings for jedi-vim
+
+" Jedi-Vim
+" ===============
+
 " cd ~/.vim/bundle
 " git clone git://github.com/davidhalter/jedi-vim.git
 let g:jedi#usages_command = "<leader>z"
@@ -257,7 +453,9 @@ inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
 inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
 
 
-" Syntastic Error checking
+" Syntastic
+" ===============
+
 " cd ~/.vim/bundle
 " git clone https://github.com/scrooloose/syntastic.git
 set statusline+=%#warningmsg#
@@ -271,17 +469,22 @@ let g:syntastic_python_flake8_args="--ignore=E501,W601,F403,E128,F401,D100,D102"
 let g:syntastic_cpp_compiler_options = ' -std=c++11'
 
 
-" Tagbar config
+" Tagbar
+" ===============
 nnoremap <F8> :TagbarToggle<CR>
 inoremap <F8> :TagbarToggle<CR>
 vnoremap <F8> :TagbarToggle<CR>
 
 
-" Python folding
+" Python Folding
+" ===============
+
 " mkdir -p ~/.vim/ftplugin
 " wget -O ~/.vim/ftplugin/python_editing.vim http://www.vim.org/scripts/download_script.php?src_id=5492
-set nofoldenable
+" set nofoldenable
 
-" Smash switch to Normal mode
-inoremap jj <Esc>
-vnoremap <Leader><Leader>j <Esc>
+
+" Close all folds in this file and use marker for folding instead of
+" indentation
+" vim:foldmethod=marker:foldlevel=0
+" }}}

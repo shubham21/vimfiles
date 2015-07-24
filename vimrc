@@ -143,10 +143,6 @@ set wildignore=*.o,*~,*.pyc
 set ruler
 
 
-" Height of the command bar
-set cmdheight=2
-
-
 " Set Terminal Color to 256
 " This helps when running vim in tmux
 set term=screen-256color

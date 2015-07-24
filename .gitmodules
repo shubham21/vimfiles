@@ -49,9 +49,6 @@
 [submodule "vim/bundle/tabular.git"]
 	path = vim/bundle/tabular.git
 	url = https://github.com/godlygeek/tabular.git
-[submodule "vim/bundle/vim-tmux-focus-events"]
-	path = vim/bundle/vim-tmux-focus-events
-	url = https://github.com/tmux-plugins/vim-tmux-focus-events
 [submodule "vim/bundle/gundo.vim"]
 	path = vim/bundle/gundo.vim
 	url = https://github.com/sjl/gundo.vim
